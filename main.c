@@ -29,7 +29,7 @@ int main(void) {
             }
         }
 
-        physics_loop(&ball);
+        game_loop(&ball);
 
         BeginDrawing();
         ClearBackground(BLACK);

@@ -7,6 +7,7 @@
 typedef struct {
     int score;
     char score_str[15];
+    Ball balls[50];
 } GameState;
 
 int clamp(int x, int min, int max) {
@@ -19,7 +20,7 @@ int clamp(int x, int min, int max) {
     }
 }
 
-void physics_loop(Ball *b) {
+void game_loop(Ball *b) {
     b->yspeed++;
     b->x += b->xspeed;
     b->y += b->yspeed;
