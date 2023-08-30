@@ -44,9 +44,11 @@ void physics_loop(Ball *b) {
     //Check collision against screen edges
     if (b->x + b->r > WIDTH || b->x - b->r < 0) {
         b->xspeed = -b->xspeed * b->bounciness;
+        b->r += 1;
     }
     if (b->y + b->r > HEIGHT || b->y - b->r < 0) {
         b->yspeed = -b->yspeed * b->bounciness;
+        b->r += 1;
     }
 
     //Clamp to screen
@@ -73,8 +75,13 @@ int main(void) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (CheckCollisionPointCircle(GetMousePosition(), (Vector2){ball.x, ball.y}, ball.r)) {
-                ball.yspeed = -50;
-                ball.r -= 1;
+                ball.yspeed = -20;
+                ball.xspeed = (ball.xspeed > 0) ? ball.xspeed + 2 : ball.xspeed - 2;
+                ball.r -= 3;
+
+                if (ball.r < 10) {
+                    ball.r = 10;
+                }
             }
         }
 
