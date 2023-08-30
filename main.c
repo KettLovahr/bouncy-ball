@@ -28,8 +28,7 @@ int main(void) {
         ClearBackground(BLACK);
         draw_loop(&game);
 
-        sprintf(game.score_str, "Score: %d", game.score);
-        DrawText(game.score_str, 20, 20, 20, WHITE);
+        update_score(&game);
         EndDrawing();
     }
     CloseWindow();

@@ -1,5 +1,6 @@
 #include "ball.c"
 #include <raylib.h>
+#include <stdio.h>
 
 #define WIDTH 1280
 #define HEIGHT 800
@@ -88,4 +89,9 @@ void get_ball_click(GameState *game, Vector2 mouse_position) {
         }
     }
 
+}
+
+void update_score(GameState *game) {
+    sprintf(game->score_str, "Score: %d", game->score);
+    DrawText(game->score_str, 20, 20, 20, WHITE);
 }
