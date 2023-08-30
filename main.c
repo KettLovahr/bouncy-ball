@@ -61,7 +61,7 @@ void draw_loop(Ball *b) {
 int main(void) {
     InitWindow(WIDTH, HEIGHT, "Kett's Raylib Test");
 
-    Ball ball = create_ball(100, 100, 10, RED);
+    Ball ball = create_ball(100, 100, 50, RED);
 
     SetTargetFPS(60);
 
@@ -69,6 +69,13 @@ int main(void) {
 
         if (IsKeyPressed(KEY_Q)) {
             TakeScreenshot("screenshot.png");
+        }
+
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            if (CheckCollisionPointCircle(GetMousePosition(), (Vector2){ball.x, ball.y}, ball.r)) {
+                ball.yspeed = -50;
+                ball.r -= 1;
+            }
         }
 
         physics_loop(&ball);
