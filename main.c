@@ -33,7 +33,7 @@ int main(void) {
 
         BeginDrawing();
         ClearBackground(BLACK);
-        draw_loop(ball);
+        draw_loop(&game);
 
         sprintf(game.score_str, "Score: %d", game.score);
         DrawText(game.score_str, 20, 20, 20, WHITE);

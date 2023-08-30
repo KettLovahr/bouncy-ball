@@ -54,8 +54,10 @@ void game_loop(GameState *game) {
     }
 }
 
-void draw_loop(Ball *b) {
-    DrawCircle(b->x, b->y, b->r, b->color);
+void draw_loop(GameState *game) {
+    for (int i = 0; i < game->ballc; i++) {
+        DrawCircle(game->ballv[i].x, game->ballv[i].y, game->ballv[i].r, game->ballv[i].color);
+    }
 }
 
 Ball* create_ball(GameState *game, int x, int y, float r, Color color) {
