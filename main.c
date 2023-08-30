@@ -32,4 +32,6 @@ int main(void) {
         DrawText(game.score_str, 20, 20, 20, WHITE);
         EndDrawing();
     }
+    CloseWindow();
+    return 0;
 }
