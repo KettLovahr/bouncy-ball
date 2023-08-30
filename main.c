@@ -7,7 +7,7 @@
 
 typedef struct {
     int score;
-    char score_str[10];
+    char score_str[15];
 } GameState;
 
 typedef struct {
@@ -18,6 +18,7 @@ typedef struct {
     float r;
     float bounciness;
     Color color;
+    int streak;
 } Ball;
 
 Ball create_ball(int x, int y, float r, Color color) {
@@ -30,6 +31,7 @@ Ball create_ball(int x, int y, float r, Color color) {
     b.xspeed = 5;
     b.yspeed = 0;
     b.bounciness = 0.9;
+    b.streak = 1;
     return b;
 }
 
@@ -56,6 +58,7 @@ void physics_loop(Ball *b) {
     if (b->y + b->r > HEIGHT || b->y - b->r < 0) {
         b->yspeed = -b->yspeed * b->bounciness;
         b->r += 1;
+        b->streak = 1;
     }
 
     //Clamp to screen
@@ -86,8 +89,9 @@ int main(void) {
                 ball.yspeed = -20;
                 ball.xspeed = (ball.xspeed > 0) ? ball.xspeed + 2 : ball.xspeed - 2;
                 ball.r -= 3;
+                ball.streak += 1;
 
-                game.score += abs((int)ball.xspeed);
+                game.score += abs((int)ball.xspeed) * ball.streak;
 
                 if (ball.r < 10) {
                     ball.r = 10;
@@ -101,7 +105,7 @@ int main(void) {
         ClearBackground(BLACK);
         draw_loop(&ball);
 
-        sprintf(game.score_str, "%d", game.score);
+        sprintf(game.score_str, "Score: %d", game.score);
         DrawText(game.score_str, 20, 20, 20, WHITE);
         EndDrawing();
     }
