@@ -1,11 +1,10 @@
-OBJS="main.c"
+CFILES="main.c"
 OUT="raylib"
 CC=gcc
 LIBS="-lraylib"
 
 build:
-	${CC} -o ${OUT} ${OBJS} ${LIBS}
+	${CC} -o ${OUT} ${CFILES} ${LIBS}
 
-run:
-	make build
+run: build
 	./${OUT}
