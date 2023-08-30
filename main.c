@@ -1,7 +1,14 @@
 #include <raylib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define WIDTH 800
 #define HEIGHT 600
+
+typedef struct {
+    int score;
+    char score_str[10];
+} GameState;
 
 typedef struct {
     int x;
@@ -63,6 +70,7 @@ void draw_loop(Ball *b) {
 int main(void) {
     InitWindow(WIDTH, HEIGHT, "Kett's Raylib Test");
 
+    GameState game = {0, ""};
     Ball ball = create_ball(100, 100, 50, RED);
 
     SetTargetFPS(60);
@@ -79,6 +87,8 @@ int main(void) {
                 ball.xspeed = (ball.xspeed > 0) ? ball.xspeed + 2 : ball.xspeed - 2;
                 ball.r -= 3;
 
+                game.score += abs((int)ball.xspeed);
+
                 if (ball.r < 10) {
                     ball.r = 10;
                 }
@@ -90,6 +100,9 @@ int main(void) {
         BeginDrawing();
         ClearBackground(BLACK);
         draw_loop(&ball);
+
+        sprintf(game.score_str, "%d", game.score);
+        DrawText(game.score_str, 20, 20, 20, WHITE);
         EndDrawing();
     }
 }
