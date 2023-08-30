@@ -96,6 +96,9 @@ int main(void) {
                 if (ball.r < 10) {
                     ball.r = 10;
                 }
+                if (ball.r > 100) {
+                    ball.r = 100;
+                }
             }
         }
 
