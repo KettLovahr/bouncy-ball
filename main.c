@@ -26,12 +26,6 @@ int main(void) {
 
                 game.score += abs((int)ball.xspeed) * ball.streak;
 
-                if (ball.r < 10) {
-                    ball.r = 10;
-                }
-                if (ball.r > 100) {
-                    ball.r = 100;
-                }
             }
         }
 

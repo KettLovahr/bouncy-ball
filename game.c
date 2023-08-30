@@ -38,6 +38,9 @@ void physics_loop(Ball *b) {
     //Clamp to screen
     b->x = clamp(b->x, 0 + b->r, WIDTH - b->r);
     b->y = clamp(b->y, 0 + b->r, HEIGHT - b->r);
+
+    //Define radius bounds
+    b->r = clamp(b->r, 10, 100);
 }
 
 void draw_loop(Ball *b) {
