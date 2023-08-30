@@ -8,6 +8,7 @@ int main(void) {
 
     GameState game = create_gamestate();
     Ball* ball = create_ball(&game, 100, 100, 50, RED);
+    Ball* ball2 = create_ball(&game, 300, 300, 50, BLUE);
 
     SetTargetFPS(60);
 
@@ -18,15 +19,7 @@ int main(void) {
         }
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (CheckCollisionPointCircle(GetMousePosition(), (Vector2){ball->x, ball->y}, ball->r)) {
-                ball->yspeed = -20;
-                ball->xspeed = (ball->xspeed > 0) ? ball->xspeed + 2 : ball->xspeed - 2;
-                ball->r -= 3;
-                ball->streak += 1;
-
-                game.score += abs((int)ball->xspeed) * ball->streak;
-
-            }
+            get_ball_click(&game, GetMousePosition());
         }
 
         game_loop(&game);

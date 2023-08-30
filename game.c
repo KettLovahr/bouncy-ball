@@ -1,7 +1,8 @@
 #include "ball.c"
+#include <raylib.h>
 
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 1280
+#define HEIGHT 800
 
 
 typedef struct {
@@ -74,4 +75,17 @@ Ball* create_ball(GameState *game, int x, int y, float r, Color color) {
 
     game->ballv[game->ballc] = b;
     return &game->ballv[game->ballc++];
+}
+
+void get_ball_click(GameState *game, Vector2 mouse_position) {
+    for (int i = 0; i < game->ballc; i++) {
+        if (CheckCollisionPointCircle(mouse_position, (Vector2){game->ballv[i].x, game->ballv[i].y}, game->ballv[i].r)) {
+            game->ballv[i].yspeed = -20;
+            game->ballv[i].xspeed += (game->ballv[i].xspeed > 0) ? 2 : -2;
+            game->ballv[i].r -= 3;
+
+            game->score += 1 * game->ballv[i].streak++;
+        }
+    }
+
 }
