@@ -1,5 +1,5 @@
 CFILES="main.c"
-OUT="raylib"
+OUT="bouncy-ball"
 CC=gcc
 LIBS="-lraylib"
 
