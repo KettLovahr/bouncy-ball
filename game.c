@@ -38,12 +38,10 @@ void game_loop(GameState *game) {
 
         //Check collision against screen edges
         if (game->ballv[i].x + game->ballv[i].r > WIDTH || game->ballv[i].x - game->ballv[i].r < 0) {
-            game->ballv[i].xspeed = -game->ballv[i].xspeed * game->ballv[i].bounciness;
-            game->ballv[i].r += 1;
+            game->ballv[i].xspeed *= -1.0 * game->ballv[i].bounciness;
         }
         if (game->ballv[i].y + game->ballv[i].r > HEIGHT || game->ballv[i].y - game->ballv[i].r < 0) {
-            game->ballv[i].yspeed = -game->ballv[i].yspeed * game->ballv[i].bounciness;
-            game->ballv[i].r += 1;
+            game->ballv[i].yspeed *= -1.0 * game->ballv[i].bounciness;
             game->ballv[i].streak = 1;
         }
 
@@ -71,7 +69,7 @@ Ball* create_ball(GameState *game, int x, int y, float r, Color color) {
 
     b.xspeed = 5;
     b.yspeed = 0;
-    b.bounciness = 0.9;
+    b.bounciness = 0.8;
     b.streak = 1;
 
     game->ballv[game->ballc] = b;
